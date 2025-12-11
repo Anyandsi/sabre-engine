@@ -12,6 +12,7 @@ add_subdirectory(external/glfw)
 
 add_executable(sabre_engine
     src/main.cpp
+    src/Renderer.cpp
     external/glad/src/glad.c
 )
 
