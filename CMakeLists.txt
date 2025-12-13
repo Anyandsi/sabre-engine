@@ -9,6 +9,7 @@ set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
 set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
 add_subdirectory(external/glfw)
+add_subdirectory(external/glm)
 
 add_executable(sabre_engine
     src/main.cpp
@@ -17,9 +18,9 @@ add_executable(sabre_engine
     external/glad/src/glad.c
 )
 
-target_include_directories(sabre_engine PRIVATE
-    external/glad/include
-)
+target_include_directories(sabre_engine PRIVATE external/glad/include)
+
+target_link_libraries(sabre_engine PRIVATE glm::glm)
 
 find_package(OpenGL REQUIRED)
 
