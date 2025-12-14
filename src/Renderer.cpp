@@ -5,6 +5,7 @@ void Renderer::init()
 {
     glClearColor(0.2f, 0.2f, 0.2f, 1.0f);
     mesh = new Mesh();
+    mesh->transform.translate({-0.4f, -0.4f, 0.0f});
 }
 
 void Renderer::render()

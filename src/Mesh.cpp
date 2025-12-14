@@ -1,5 +1,6 @@
 #include "Mesh.h"
 #include <iostream>
+#include <glm/gtc/type_ptr.hpp>
 
 static void checkShaderCompilation(GLuint s, const char *label)
 {
@@ -31,7 +32,8 @@ Mesh::Mesh()
     const char *vertexShaderSource = R"(
         #version 460 core
         layout (location = 0) in vec3 aPos;
-        void main() { gl_Position = vec4(aPos, 1.0); }
+        uniform mat4 uModel;
+        void main() { gl_Position = uModel * vec4(aPos, 1.0); }
     )";
 
     const char *fragmentShaderSource = R"(
@@ -77,6 +79,10 @@ Mesh::Mesh()
 void Mesh::draw()
 {
     glUseProgram(program);
+
+    GLint loc = glGetUniformLocation(program, "uModel");
+    glUniformMatrix4fv(loc, 1, GL_FALSE, glm::value_ptr(transform.getMatrix()));
+
     glBindVertexArray(vao);
     glDrawArrays(GL_TRIANGLES, 0, 3);
 }
