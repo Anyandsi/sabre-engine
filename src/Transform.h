@@ -12,9 +12,14 @@ public:
         matrix_ = glm::translate(matrix_, p);
     }
 
-    void rotate(const float radians, const glm::vec3 &axis)
+    void rotate(const float radians, const glm::vec3 axis)
     {
         matrix_ = glm::rotate(matrix_, radians, axis);
+    }
+
+    void scale(const glm::vec3 s)
+    {
+        matrix_ = glm::scale(matrix_, s);
     }
 
 private:
