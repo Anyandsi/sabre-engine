@@ -12,6 +12,11 @@ public:
         matrix_ = glm::translate(matrix_, p);
     }
 
+    void rotate(const float radians, const glm::vec3 &axis)
+    {
+        matrix_ = glm::rotate(matrix_, radians, axis);
+    }
+
 private:
     glm::mat4 matrix_;
 };
