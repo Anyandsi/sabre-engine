@@ -1,4 +1,5 @@
 #include "Mesh.h"
+#include "utils/FileReader.h"
 #include <iostream>
 #include <glm/gtc/type_ptr.hpp>
 
@@ -29,18 +30,11 @@ Mesh::Mesh()
         0.0f,
     };
 
-    const char *vertexShaderSource = R"(
-        #version 460 core
-        layout (location = 0) in vec3 aPos;
-        uniform mat4 uModel;
-        void main() { gl_Position = uModel * vec4(aPos, 1.0); }
-    )";
+    std::string vertexShaderSourceStr = FileReader::readFile(std::string(SHADER_DIR) + "/mesh.vert");
+    const char *vertexShaderSource = vertexShaderSourceStr.c_str();
 
-    const char *fragmentShaderSource = R"(
-        #version 460 core
-        out vec4 FragColor;
-        void main() { FragColor = vec4(0.54, 0.69, 0.79, 1.0); }
-    )";
+    std::string fragmentShaderSourceStr = FileReader::readFile(std::string(SHADER_DIR) + "/mesh.frag");
+    const char *fragmentShaderSource = fragmentShaderSourceStr.c_str();
 
     // Create and compile shaders
 

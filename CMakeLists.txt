@@ -16,6 +16,7 @@ add_executable(sabre_engine
     src/Renderer.cpp
     src/Mesh.cpp
     external/glad/src/glad.c
+    src/utils/FileReader.cpp
 )
 
 target_include_directories(sabre_engine PRIVATE external/glad/include)
@@ -27,4 +28,8 @@ find_package(OpenGL REQUIRED)
 target_link_libraries(sabre_engine PRIVATE
     glfw
     OpenGL::GL
+)
+
+target_compile_definitions(sabre_engine
+    PRIVATE SHADER_DIR="${CMAKE_SOURCE_DIR}/src/shaders"
 )
