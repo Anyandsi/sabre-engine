@@ -33,3 +33,7 @@ target_link_libraries(sabre_engine PRIVATE
 target_compile_definitions(sabre_engine
     PRIVATE SHADER_DIR="${CMAKE_SOURCE_DIR}/src/shaders"
 )
+
+target_include_directories(sabre_engine PRIVATE
+    ${CMAKE_SOURCE_DIR}/external/stb
+)
