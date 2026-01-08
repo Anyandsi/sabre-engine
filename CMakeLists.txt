@@ -34,11 +34,12 @@ target_compile_definitions(sabre_engine
     PRIVATE SHADER_DIR="${CMAKE_SOURCE_DIR}/src/shaders"
 )
 
+target_compile_definitions(sabre_engine PRIVATE
+    TEXTURE_DIR="${CMAKE_SOURCE_DIR}/src/textures"
+)
+
 target_include_directories(sabre_engine PRIVATE
     ${CMAKE_SOURCE_DIR}/external/stb
 )
 
-file(COPY
-    ${CMAKE_SOURCE_DIR}/src/textures
-    DESTINATION ${CMAKE_BINARY_DIR}
-)
+
