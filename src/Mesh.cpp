@@ -18,35 +18,8 @@ static void checkShaderCompilation(GLuint s, const char *label)
               << log << "\n";
 }
 
-Mesh::Mesh()
+Mesh::Mesh(std::vector<float> &vertices) : vertices_(vertices)
 {
-    // pos (x y z) + color (r g b) + uv (x y)
-    float vertices[] = {
-        0.0f,
-        0.0f,
-        0.0f,
-        1.0f,
-        0.0f,
-        0.0f,
-        0.0f,
-        0.0f,
-        0.0f,
-        0.9f,
-        0.0f,
-        0.0f,
-        1.0f,
-        0.0f,
-        0.0f,
-        1.0f,
-        0.9f,
-        0.0f,
-        0.0f,
-        0.0f,
-        0.0f,
-        1.0f,
-        1.0f,
-        0.0f,
-    };
 
     std::string vertexShaderSourceStr = FileReader::readFile(std::string(SHADER_DIR) + "/mesh.vert");
     const char *vertexShaderSource = vertexShaderSourceStr.c_str();
@@ -103,7 +76,7 @@ Mesh::Mesh()
     glBindVertexArray(vao);
 
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, vertices_.size() * sizeof(float), vertices_.data(), GL_STATIC_DRAW);
 
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(float), (void *)0);
     glEnableVertexAttribArray(0);
@@ -128,5 +101,7 @@ void Mesh::draw()
     glBindVertexArray(vao);
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, texture);
-    glDrawArrays(GL_TRIANGLES, 0, 3);
+
+    vertexCount_ = vertices_.size() / 8;
+    glDrawArrays(GL_TRIANGLES, 0, vertexCount_);
 }
