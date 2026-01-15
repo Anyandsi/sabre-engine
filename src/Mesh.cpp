@@ -95,7 +95,7 @@ void Mesh::draw()
     glUseProgram(program);
     glUniform1i(glGetUniformLocation(program, "uTexture"), 0);
 
-    GLint loc = glGetUniformLocation(program, "uModel");
+    GLint loc = glGetUniformLocation(program, "model");
     glUniformMatrix4fv(loc, 1, GL_FALSE, glm::value_ptr(transform.getMatrix()));
 
     glBindVertexArray(vao);

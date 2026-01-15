@@ -10,6 +10,8 @@ public:
     void draw();
     Transform transform;
 
+    GLuint getProgram() const { return program; }
+
 private:
     GLuint vbo = 0;
     GLuint vao = 0;
