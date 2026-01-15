@@ -58,14 +58,28 @@ void Renderer::init()
     };
 
     mesh = new Mesh(vertices);
-    mesh->transform.rotate(-45.0f, glm::vec3(1.0f, 0.0f, 0.0f));
-    mesh->transform.rotate(-45.0f, glm::vec3(0.0f, 0.0f, 1.0f));
+    mesh->transform.rotate(10.0f, glm::vec3(1.0f, 0.0f, 0.0f));
 }
 
 void Renderer::render()
 {
     glClear(GL_COLOR_BUFFER_BIT);
     glUseProgram(mesh->getProgram());
+
+    hoverY += hoverDir * 0.002f;
+    if (hoverY > 0.0f)  hoverDir = -1.0f;
+    if (hoverY < -0.1f) hoverDir =  1.0f;
+    spinY += 0.02f;
+    if (spinY > glm::two_pi<float>())
+        spinY -= glm::two_pi<float>();
+
+    mesh->transform.setIdentity();
+    // TODO: implement separate static and dynamic model transformations
+    mesh->transform.rotate(glm::radians(20.0f), glm::vec3(1,0,0));
+    mesh->transform.rotate(spinY, glm::vec3(0,1,0));
+    mesh->transform.translate(glm::vec3(0.0f, hoverY, 0.0f));
+
+    mesh->transform.translate(glm::vec3(0.0f, hoverY, 0.0f));
 
     glm::mat4 view = glm::mat4(1.0f);
     view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));

@@ -7,6 +7,11 @@ public:
     void init();
     void render();
 
+    // just for a temporary hover+rotation animation
+    float hoverY = 0.0f;
+    float hoverDir = 1.0f;
+    float spinY = 0.0f;
+
 private:
     Mesh *mesh = nullptr;
 };
