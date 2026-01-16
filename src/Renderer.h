@@ -5,7 +5,7 @@ class Renderer
 {
 public:
     void init();
-    void render();
+    void render(bool isPaused);
 
     // just for a temporary hover+rotation animation
     float hoverY = 0.0f;
