@@ -61,7 +61,7 @@ void Renderer::init()
     mesh->transform.rotate(10.0f, glm::vec3(1.0f, 0.0f, 0.0f));
 }
 
-void Renderer::render(bool isPaused)
+void Renderer::render(bool isPaused, int windowWidth, int windowHeight)
 {
     glClear(GL_COLOR_BUFFER_BIT);
     glUseProgram(mesh->getProgram());
@@ -82,7 +82,7 @@ void Renderer::render(bool isPaused)
     view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
 
     glm::mat4 projection;
-    projection = glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f,
+    projection = glm::perspective(glm::radians(45.0f), ((float) windowWidth / (float) windowHeight), 0.1f,
                                   100.0f);
 
     glUniformMatrix4fv(

@@ -53,9 +53,11 @@ int main()
 
     do
     {
+        int width, height;
+        glfwGetFramebufferSize(window, &width, &height);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         // TODO: refactor Renderer and Mesh classes
-        renderer.render(isPaused);
+        renderer.render(isPaused, width, height);
         processInput(window);
         glfwSwapBuffers(window);
         glfwPollEvents();
