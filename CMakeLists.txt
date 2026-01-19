@@ -15,6 +15,7 @@ add_executable(sabre_engine
     src/main.cpp
     src/Renderer.cpp
     src/Mesh.cpp
+    src/Camera.cpp
     external/glad/src/glad.c
     src/utils/FileReader.cpp
 )

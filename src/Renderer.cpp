@@ -59,6 +59,12 @@ void Renderer::init()
 
     mesh = new Mesh(vertices);
     mesh->transform.rotate(10.0f, glm::vec3(1.0f, 0.0f, 0.0f));
+
+    glm::vec3 cameraPos = glm::vec3(10.0f, 0.0f, 10.0f);
+    glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
+    glm::vec3 cameraTarget = glm::vec3(0.0f, 0.0f, 0.0f);
+
+    camera = new Camera(cameraPos, cameraUp, cameraTarget);
 }
 
 void Renderer::render(bool isPaused, int windowWidth, int windowHeight)
@@ -78,8 +84,7 @@ void Renderer::render(bool isPaused, int windowWidth, int windowHeight)
         mesh->transform.rotate(spinY, glm::vec3(0,1,0));
     }
 
-    glm::mat4 view = glm::mat4(1.0f);
-    view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
+    glm::mat4 view = camera->getLookAtMatrix();
 
     glm::mat4 projection;
     projection = glm::perspective(glm::radians(45.0f), ((float) windowWidth / (float) windowHeight), 0.1f,

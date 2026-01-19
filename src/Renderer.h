@@ -1,5 +1,6 @@
 #pragma once
 #include "Mesh.h"
+#include "Camera.h"
 
 class Renderer
 {
@@ -14,4 +15,5 @@ public:
 
 private:
     Mesh *mesh = nullptr;
+    Camera *camera = nullptr;
 };
