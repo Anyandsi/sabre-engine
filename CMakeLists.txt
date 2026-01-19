@@ -32,11 +32,11 @@ target_link_libraries(sabre_engine PRIVATE
 )
 
 target_compile_definitions(sabre_engine
-    PRIVATE SHADER_DIR="${CMAKE_SOURCE_DIR}/src/shaders"
+    PRIVATE SHADER_DIR="${CMAKE_SOURCE_DIR}/assets/shaders"
 )
 
 target_compile_definitions(sabre_engine PRIVATE
-    TEXTURE_DIR="${CMAKE_SOURCE_DIR}/src/textures"
+    TEXTURE_DIR="${CMAKE_SOURCE_DIR}/assets/textures"
 )
 
 target_include_directories(sabre_engine PRIVATE
