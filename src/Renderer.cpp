@@ -72,17 +72,20 @@ void Renderer::render(bool isPaused, int windowWidth, int windowHeight)
     glClear(GL_COLOR_BUFFER_BIT);
     glUseProgram(mesh->getProgram());
 
-    spinY += 0.02f;
-    if (spinY > glm::two_pi<float>())
-        spinY -= glm::two_pi<float>();
-
-    if (!isPaused) {
-        mesh->transform.setIdentity();
-        // TODO: implement separate static and dynamic model transformations
-        mesh->transform.scale({0.75f, 0.75f, 0.75f});
-        mesh->transform.rotate(glm::radians(20.0f), glm::vec3(1,0,0));
-        mesh->transform.rotate(spinY, glm::vec3(0,1,0));
+    if(!isPaused)
+    {
+        spinY += 0.02f;
+        if (spinY > glm::two_pi<float>())
+            spinY -= glm::two_pi<float>();
     }
+
+    float radius = 5.0f; 
+    float camX = std::sin(spinY) * radius;
+    float camZ = std::cos(spinY) * radius;
+    
+    glm::vec3 newCameraPos = glm::vec3(camX, 0.0f, camZ);
+
+    camera->setPosition(newCameraPos);
 
     glm::mat4 view = camera->getLookAtMatrix();
 
